@@ -1,0 +1,22 @@
+CREATE TABLE users (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL, 
+    role ENUM('admin', 'subscriber') DEFAULT 'subscriber',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+    email VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL, 
+    author_id INT NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE 
+);
+
+CREATE TABLE newsletter_subscribers (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
